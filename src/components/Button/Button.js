@@ -7,12 +7,12 @@ const colorMixin = ({theme}) => css`
 
 const Button = styled.button`
   ${colorMixin}
-  ${ifprop('primary')`
+  ${ifprop('primary', css`
     background:blue;
-  `}
-  ${ifprop('secondary')`
+  `)}
+  ${ifprop('secondary', css`
     background:red;
-  `}
+  `)}
 `
 
 export default Button
