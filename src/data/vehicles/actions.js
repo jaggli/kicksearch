@@ -6,6 +6,11 @@ const apiUrl = 'https://kicksearch-data.herokuapp.com/api/v1/'
 export const fetchList = () => {
   return {
     type: FETCH_LIST,
-    payload: fetch(apiUrl + 'vehicles')
+    payload: global.fetch(apiUrl + 'vehicles')
+      .then(response => response.json())
+      .then(json => {
+        console.log(json)
+        return json
+      })
   }
 }
