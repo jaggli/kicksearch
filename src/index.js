@@ -1,10 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import promiseMiddleware from 'redux-promise-middleware'
-
-import reducers from './reducers'
 
 import { BrowserRouter, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
@@ -12,7 +8,8 @@ import { ThemeProvider } from 'styled-components'
 import theme from 'styles/theme'
 import Home from './pages/Home'
 
-const store = createStore(reducers, applyMiddleware(promiseMiddleware()))
+import configureStore from './configureStore'
+const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>

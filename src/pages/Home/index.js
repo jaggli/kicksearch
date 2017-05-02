@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import Button, { IconButton } from 'components/Button'
+import { connect } from 'react-redux'
+import { fetchList } from '../../data/vehicles/actions'
+import { getAllVehicles } from '../../data/vehicles/reducer'
 
-export default class Home extends Component {
+class Home extends Component {
+  componentDidMount () {
+    this.props.fetchList()
+  }
   render () {
     return (
       <div>
@@ -15,3 +21,11 @@ export default class Home extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  status: getAllVehicles(state)
+})
+
+export default connect(mapStateToProps, {
+  fetchList
+})(Home)
