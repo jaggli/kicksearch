@@ -11,6 +11,7 @@ export default class Home extends Component {
         <IconButton primary>
           Button with icon
         </IconButton>
+        Hello from new repo
       </div>
     )
   }
