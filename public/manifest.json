@@ -1,34 +1,34 @@
 {
   "short_name": "Kicksearch",
   "name": "Challange Days: Kicksearch",
-  "background_color": "#2196F3",
-  "theme_color": "#2196F3",
+  "background_color": "#517fa4",
+  "theme_color": "#517fa4",
   "display": "fullscreen",
   "icons": [
     {
-      "src": "launcher-icon-1x.png",
+      "src": "img/logo-48.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "launcher-icon-2x.png",
+      "src": "img/logo-96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "launcher-icon-4x.png",
+      "src": "img/logo-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "launcher-icon-4x.png",
+      "src": "img/logo-228.png",
       "type": "image/png",
       "sizes": "228x228"
     },
     {
-      "src": "launcher-icon.svg",
-      "type": "image/svg",
-      "sizes": "any"
+      "src": "img/logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".?launcher=true"
