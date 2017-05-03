@@ -3,6 +3,7 @@ import _ from 'lodash'
 
 import Input from 'components/Input/'
 import Autocomplete from 'components/Autocomplete/'
+import Picker from 'components/Picker/'
 
 const SearchForm = class SearchForm extends Component {
   constructor (props) {
@@ -38,7 +39,7 @@ const SearchForm = class SearchForm extends Component {
         console.log( this.props.data.answers )
         return (
           <div>
-
+            <Picker data={() => this.state.list} />
           </div>
         )
       default:

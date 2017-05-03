@@ -15,17 +15,18 @@ class Home extends Component {
     router: PropTypes.object
   }
 
-  componentWillMount () {
-    this.props.fetchList(this.context.router.route.location.search)
-    
+  constructor (props) {
+    super(props)
+
+    props.history.listen(()=>props.fetchList(props.history.location.search))
   }
 
-  componentWillUpdate () {
-    console.log("componentWillUpdate", this.props.history.location.search)
-    // console.log("componentDidUpdate", this.props.fetchList(this.context.router.route.location.search))
+  componentDidMount () {
+    this.props.fetchList(this.props.history.location.search)
   }
 
   render () {
+
     if (!this.props.vehiclesList.next) {
       return <div>loading...</div>
     }

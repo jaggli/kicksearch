@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { connect } from 'react-redux'
-import { fetchList } from '../../data/vehicles/actions'
-import { getList } from '../../data/vehicles/reducer'
-
 const AutocompleteList = styled.ul`
   margin:0;
   padding:0;
@@ -33,7 +29,6 @@ class Autocomplete extends Component {
     let linkTo = currentUrl ? `${currentUrl}&${this.props.id}=${vehicle.value}` : `?${this.props.id}=${vehicle.value}`
     
     this.context.router.history.push(linkTo)
-    this.props.fetchList(linkTo)
   }
 
   renderList () {
@@ -55,10 +50,4 @@ class Autocomplete extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  vehiclesList: getList(state)
-})
-
-export default connect(mapStateToProps, {
-  fetchList
-})(Autocomplete)
+export default Autocomplete
