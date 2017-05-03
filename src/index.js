@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
+import './styles/globalStyles'
+
 import { BrowserRouter, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 

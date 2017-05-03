@@ -1,8 +1,8 @@
 {
   "short_name": "Kicksearch",
   "name": "Challange Days: Kicksearch",
-  "background_color": "#517fa4",
-  "theme_color": "#517fa4",
+  "background_color": "#243949",
+  "theme_color": "#243949",
   "display": "fullscreen",
   "icons": [
     {
