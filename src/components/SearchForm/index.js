@@ -14,7 +14,6 @@ const SearchForm = class SearchForm extends Component {
           </div>
         )
       case 'numeric':
-      case 'distinct':
         return (
           <div>
             <Picker data={this.props.data} />

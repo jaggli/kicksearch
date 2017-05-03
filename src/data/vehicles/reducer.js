@@ -1,7 +1,8 @@
-import { FETCH_LIST } from './actions'
+import { FETCH_LIST, FETCH_CORE_DATA } from './actions'
 
 const initialState = {
-  all: []
+  all: [],
+  coreData: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -12,6 +13,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         all: action.payload
       }
+    case `${FETCH_CORE_DATA}_FULFILLED`:
+      return {
+        ...state,
+        coreData: action.payload
+      }
     default:
       return state
   }
@@ -19,4 +25,5 @@ const reducer = (state = initialState, action) => {
 export default reducer
 
 export const getList = state => state.data.vehicles.all
+export const getCoreData = state => state.data.vehicles.coreData
 

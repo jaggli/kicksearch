@@ -10,6 +10,7 @@ import Content from 'components/Content/'
 import Header from 'components/Header/'
 import SearchForm from 'components/SearchForm/'
 import PageTitle from 'components/PageTitle/'
+import Question from 'components/Question/'
 
 class Home extends Component {
   static contextTypes = {
@@ -23,7 +24,6 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    console.log("componentDidMount", this.props)
     this.props.fetchList(this.props.history.location.search)
   }
 
@@ -32,9 +32,11 @@ class Home extends Component {
     if (!this.props.vehiclesList.next) { return null }
     // if ready for result list
     if (this.props.vehiclesList.meta.length <= 20) {
-      return <Redirect to="/resultlist" />
+      return <Redirect to={{
+          pathname:'/resultlist',
+          search: this.props.history.location.search
+        }} />
     }
-    
 
     const next = this.props.vehiclesList.next
     const { title } = next
@@ -45,6 +47,7 @@ class Home extends Component {
           <PageTitle centered>{title}</PageTitle>
         </Header>
         <Content>
+          <Question>{next.question}</Question>
           <SearchForm data={next} />
         </Content>
       </div>
