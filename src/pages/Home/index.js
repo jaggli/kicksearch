@@ -1,49 +1,44 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import { connect } from 'react-redux'
-import { fetchMakeList } from '../../data/vehicles/actions'
-import { getVehicleMakes } from '../../data/vehicles/reducer'
-import _ from 'lodash'
+import { fetchList } from '../../data/vehicles/actions'
+import { getList } from '../../data/vehicles/reducer'
 
 import Content from 'components/Content/'
 import Header from 'components/Header/'
+import SearchForm from 'components/SearchForm/'
 import PageTitle from 'components/PageTitle/'
-import Input from 'components/Input/'
-import Autocomplete from 'components/Autocomplete/'
 
 class Home extends Component {
-  constructor (props) {
-    super(props)
-
-    this.onChangeInput = this.onChangeInput.bind(this)
-
-    this.state = { list: [] }
+  static contextTypes = {
+    router: PropTypes.object
   }
 
-  componentDidMount () {
-    this.props.fetchMakeList()
+  componentWillMount () {
+    this.props.fetchList(this.context.router.route.location.search)
+    
   }
 
-  onChangeInput (event) {
-    const makeList = _.map(this.props.vehicles.MakeId, element => element)
-    const value = event.target.value
-
-    if (!value) { return this.setState({list: []}) }
-
-    let regex = new RegExp('^' + value, 'i')
-    const matchingList = makeList.filter(element => regex.test(element))
-
-    this.setState({ list: matchingList })
+  componentWillUpdate () {
+    console.log("componentWillUpdate", this.props.history.location.search)
+    // console.log("componentDidUpdate", this.props.fetchList(this.context.router.route.location.search))
   }
 
   render () {
+    if (!this.props.vehiclesList.next) {
+      return <div>loading...</div>
+    }
+    const next = this.props.vehiclesList.next
+    const { title } = next
+
     return (
       <div>
         <Header>
-          <PageTitle centered>Marke</PageTitle>
+          <PageTitle centered>{title}</PageTitle>
         </Header>
         <Content>
-          <Input placeholder='z.b. Audi' onChange={this.onChangeInput} />
-          <Autocomplete data={() => this.state.list} />
+          <SearchForm data={next} />
         </Content>
       </div>
     )
@@ -51,9 +46,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  vehicles: getVehicleMakes(state)
+  vehiclesList: getList(state)
 })
 
 export default connect(mapStateToProps, {
-  fetchMakeList
+  fetchList
 })(Home)

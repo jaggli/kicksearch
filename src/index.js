@@ -19,7 +19,7 @@ ReactDOM.render(
       <BrowserRouter>
         <div>
           <Route exact path='/' component={Home} />
-          {/*<Route exact path='/otherpage' component={} />*/}
+          {/*<Route exact path='/search' component={SearchPage} />*/}
         </div>
       </BrowserRouter>
     </ThemeProvider>
