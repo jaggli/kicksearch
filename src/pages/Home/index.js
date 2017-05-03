@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { fetchList } from '../../data/vehicles/actions'
@@ -22,14 +23,19 @@ class Home extends Component {
   }
 
   componentDidMount () {
+    console.log("componentDidMount", this.props)
     this.props.fetchList(this.props.history.location.search)
   }
 
   render () {
-
-    if (!this.props.vehiclesList.next) {
-      return <div>loading...</div>
+    // if fetch is not finished yet
+    if (!this.props.vehiclesList.next) { return null }
+    // if ready for result list
+    if (this.props.vehiclesList.meta.length <= 20) {
+      return <Redirect to="/resultlist" />
     }
+    
+
     const next = this.props.vehiclesList.next
     const { title } = next
 

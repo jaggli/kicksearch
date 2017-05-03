@@ -1,37 +1,50 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { connect } from 'react-redux'
-import { fetchList } from '../../data/vehicles/actions'
-import { getList } from '../../data/vehicles/reducer'
+import concatParameters from 'concatParameters'
 
 const PickerItem = styled.div`
   margin:0;
   padding:0;
-  background-color:red;
+  border:1px solid ${(props) => props.theme.color.border}
+`
+
+const PickerContainer = styled.div`
+  
 `
 
 class Picker extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  constructor (props) {
+    super(props)
+
+    this.renderItems = this.renderItems.bind(this)
+    this.onClickAnswer = this.onClickAnswer.bind(this)
+  }
+
+  onClickAnswer (answer) {
+    this.context.router.history.push(concatParameters(answer.value, this))
+  }
+
   renderItems () {
-    console.log(this.props)
-    return (
-      <PickerItem></PickerItem>
-    )
+    return this.props.data.answers.map((item) => {
+      return (
+        <PickerItem key={item.value} onClick={() => this.onClickAnswer(item)}>{item.title}</PickerItem>
+      )
+    })
   }
 
   render () {
     return (
-      <div>
+      <PickerContainer>
         {this.renderItems()}
-      </div>
+      </PickerContainer>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  vehiclesList: getList(state)
-})
-
-export default connect(mapStateToProps, {
-  fetchList
-})(Picker)
+export default Picker

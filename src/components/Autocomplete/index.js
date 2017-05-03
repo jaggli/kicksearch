@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import concatParameters from 'concatParameters'
+
+import Input from 'components/Input/'
+
 const AutocompleteList = styled.ul`
   margin:0;
   padding:0;
@@ -20,21 +24,34 @@ class Autocomplete extends Component {
 
   constructor (props) {
     super(props)
+    
+    this.onClickAutocompleteItem = this.onClickAutocompleteItem.bind(this)
+    this.onChangeAutocompleteInput = this.onChangeAutocompleteInput.bind(this)
+    this.renderList = this.renderList.bind(this)
 
-    this.onClickMake = this.onClickMake.bind(this)
+    this.state = { list: [] }
   }
 
-  onClickMake (vehicle) {
-    let currentUrl = this.context.router.route.location.search
-    let linkTo = currentUrl ? `${currentUrl}&${this.props.id}=${vehicle.value}` : `?${this.props.id}=${vehicle.value}`
-    
-    this.context.router.history.push(linkTo)
+  onChangeAutocompleteInput (event) {
+    let answers = this.props.data.answers
+    let value = event.target.value
+
+    if (!value) { return this.setState({list: []}) }
+
+    let regex = new RegExp(value, 'i')
+    let matchingList = answers.filter(element => regex.test(element.title))
+
+    this.setState({ list: matchingList })
+  }
+
+  onClickAutocompleteItem (vehicle) {
+    this.context.router.history.push(concatParameters(vehicle.value, this))
   }
 
   renderList () {
-    return this.props.data().map((vehicle) => {
+    return this.state.list.map((vehicle) => {
       return (
-        <AutocompleteItem key={vehicle.value} onClick={() => this.onClickMake(vehicle)}>
+        <AutocompleteItem key={vehicle.value} onClick={() => this.onClickAutocompleteItem(vehicle)}>
           {vehicle.title}
         </AutocompleteItem>
       )
@@ -43,9 +60,12 @@ class Autocomplete extends Component {
 
   render () {
     return (
-      <AutocompleteList>
-        {this.renderList()}
-      </AutocompleteList>
+      <div>
+        <Input placeholder='z.b. Audi' onChange={this.onChangeAutocompleteInput} />
+        <AutocompleteList>
+          {this.renderList()}
+        </AutocompleteList>
+      </div>
     )
   }
 }
