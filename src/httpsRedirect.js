@@ -1,3 +1,4 @@
+// original but deprecated at https://www.npmjs.com/package/react-https-redirect
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
