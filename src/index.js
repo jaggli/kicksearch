@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import HttpsRedirect from 'httpsRedirect'
 
 import './styles/globalStyles'
 
@@ -17,16 +16,14 @@ const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>
-    <HttpsRedirect>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <div>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/resultlist' component={ResultList} />
-          </div>
-        </BrowserRouter>
-      </ThemeProvider>
-    </HttpsRedirect>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <div>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/resultlist' component={ResultList} />
+        </div>
+      </BrowserRouter>
+    </ThemeProvider>
   </Provider>
   , document.getElementById('root')
 )
