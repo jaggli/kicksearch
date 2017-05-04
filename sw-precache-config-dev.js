@@ -14,7 +14,7 @@ module.exports = {
   },
   {
     urlPattern: /^http:\/\/cas01\.autoscout24\.ch/,
-    handler: 'cacheFirst'
+    handler: 'fastest'
   }
   ]
 }
