@@ -23,6 +23,7 @@ const Button = styled.a`
   width:100%;
   background-color:${props => props.theme.color.buttonBackground};
   text-align:center;
+  user-select:none;
 `
 
 export default Button

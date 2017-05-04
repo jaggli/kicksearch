@@ -11,6 +11,7 @@ import { getList } from '../../data/vehicles/reducer'
 import Content from 'components/Content/'
 import Header from 'components/Header/'
 import Footer from 'components/Footer/'
+import Fixed from 'components/Fixed/'
 import SearchForm from 'components/SearchForm/'
 import PageTitle from 'components/PageTitle/'
 import Question from 'components/Question/'
@@ -67,7 +68,9 @@ class Home extends Component {
           <SearchForm data={next} />
         </Content>
         <Footer>
-          <Button onClick={this.onClickSkip}>Überspringen</Button>
+          <Fixed bottom>
+            <Button onClick={this.onClickSkip}>Überspringen</Button>
+          </Fixed>
         </Footer>
       </div>
     )
