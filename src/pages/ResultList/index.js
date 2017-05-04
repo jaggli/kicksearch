@@ -1,45 +1,94 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
+import clear from 'styles/mixins/clear'
 
 import { connect } from 'react-redux'
-import { fetchList, fetchCoreData } from '../../data/vehicles/actions'
-import { getList, getCoreData } from '../../data/vehicles/reducer'
+import { fetchList } from '../../data/vehicles/actions'
+import { getList } from '../../data/vehicles/reducer'
+import { fetchCoreData } from '../../data/coreData/actions'
+import { getCoreData } from '../../data/coreData/reducer'
 
 import Content from 'components/Content/'
 import Header from 'components/Header/'
 import PageTitle from 'components/PageTitle/'
 
+const ImageContainer = styled.div`
+  margin-right:${props => props.theme.defaultGab}
+  float:left;
+  width:120px;
+  height:90px;
+  position:relative;
+`
+
+const Image = styled.img`
+  position:absolute;
+  top:50%;
+  left:50%;
+  max-width:100%;
+  max-height:100%;
+  transform: translate(-50%, -50%);
+`
+
+const ListContainer = styled.ul`
+  list-style:none;
+  margin:0;
+  padding:0;
+`
+
+const ListItem = styled.li`
+  ${clear}
+  border-bottom:1px solid ${props => props.theme.color.border};
+  margin-bottom:${props => props.theme.defaultGab};
+  padding-bottom:${props => props.theme.defaultGab};
+`
+
 const ResultList = class ResultList extends Component {
   componentDidMount () {
-    this.props.fetchList(this.props.history.location.search)
+    // get vehicles list if direct call
+    if (!this.props.vehiclesList.length) {
+      this.props.fetchList(this.props.history.location.search)
+    }
     this.props.fetchCoreData(this.props.history.location.search)
   }
 
   renderList () {
-    console.log(this.props)
     if (!this.props.vehiclesList.list) {
       return <div>No results</div>
     }
-    
-    return this.props.vehiclesList.list.map((vehicle) => {
 
+    return this.props.vehiclesList.list.map((vehicle) => {
       return (
-        <li key={vehicle.Id}>
+        <ListItem key={vehicle.Id}>
+          <ImageContainer>
+            {vehicle.Images ? (
+              <Image src={vehicle.Images} alt={`${vehicle.MakeId} - ${vehicle.ModelId}`} />
+            ) : (
+              <Image src={process.env.PUBLIC_URL + '/img/no-pic.jpg'} alt='no image' />
+            )}
+          </ImageContainer>
           {vehicle.MakeId} - {vehicle.ModelId}
-        </li>
+          <br />
+          {vehicle.FirstRegYear} - {vehicle.Km}km
+          <br />
+          CHF {vehicle.Price}.-
+        </ListItem>
       )
     })
   }
 
   render () {
+    if (!this.props.vehiclesList.list) {
+      return <div>loading...</div>
+    }
     return (
       <div>
         <Header>
-          <PageTitle>Resultlist</PageTitle>
+          <PageTitle>{this.props.vehiclesList.meta.length} passende Fahrzeuge gefunden</PageTitle>
         </Header>
         <Content>
-          <ul>
+          <ListContainer>
             { this.renderList() }
-          </ul>
+          </ListContainer>
         </Content>
       </div>
     )

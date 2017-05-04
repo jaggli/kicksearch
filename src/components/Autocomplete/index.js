@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import concatParameters from 'concatParameters'
+import concatParameters from 'helpers/concatParameters'
 
 import Input from 'components/Input/'
 

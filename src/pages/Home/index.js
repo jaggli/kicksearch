@@ -32,10 +32,7 @@ class Home extends Component {
     if (!this.props.vehiclesList.next) { return null }
     // if ready for result list
     if (this.props.vehiclesList.meta.length <= 20) {
-      return <Redirect to={{
-          pathname:'/resultlist',
-          search: this.props.history.location.search
-        }} />
+      return <Redirect to={`/resultlist${this.props.history.location.search}`} />
     }
 
     const next = this.props.vehiclesList.next
