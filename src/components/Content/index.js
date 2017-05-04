@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   padding:${props => props.theme.defaultGab};
+  box-sizing:border-box;
 `
 
 export default Wrapper

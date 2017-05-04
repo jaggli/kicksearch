@@ -62,7 +62,13 @@ class Picker extends Component {
   }
 
   onClickAnswer (answer) {
-    this.context.router.history.push(concatParameters(answer.value, this))
+    this.context.router.history.push(
+      concatParameters(
+        this.props.data.id,
+        answer.value,
+        this.context.router.route.location.search
+      )
+    )
   }
 
   renderItems () {

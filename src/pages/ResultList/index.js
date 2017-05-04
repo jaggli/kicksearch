@@ -42,7 +42,7 @@ const ListItem = styled.li`
 
 const ResultList = class ResultList extends Component {
   componentDidMount () {
-    // get vehicles list if direct call
+    // get new vehicles list if direct call
     if (!this.props.vehiclesList.length) {
       this.props.fetchList(this.props.history.location.search)
     }
@@ -63,8 +63,14 @@ const ResultList = class ResultList extends Component {
               <Image src={process.env.PUBLIC_URL + '/img/no-pic.jpg'} alt='no image' />
             )}
           </ImageContainer>
-          {vehicle.MakeId} - {vehicle.ModelId}
-          <br />
+          {vehicle.MakeId}
+          {vehicle.ModelId ? (
+            <div>
+              {vehicle.ModelId}
+            </div>
+          ) : (
+            <br />
+          )}
           {vehicle.FirstRegYear} - {vehicle.Km}km
           <br />
           CHF {vehicle.Price}.-
@@ -80,11 +86,7 @@ const ResultList = class ResultList extends Component {
     return (
       <div>
         <Header>
-          {this.props.vehiclesList.meta.length !== 1 ? (
-            <PageTitle>{this.props.vehiclesList.meta.length} passende Fahrzeuge gefunden</PageTitle>
-          ) : (
-            <PageTitle>{this.props.vehiclesList.meta.length} passendes Fahrzeuge gefunden</PageTitle>
-          )}
+          <PageTitle>{this.props.vehiclesList.meta.length} passende{this.props.vehiclesList.meta.length !== 1 ? '' : 's'} Fahrzeuge gefunden</PageTitle>
         </Header>
         <Content>
           <ListContainer>

@@ -13,8 +13,8 @@ const AutocompleteList = styled.ul`
 `
 
 const AutocompleteItem = styled.li`
-  border-bottom:1px solid ${(props) => props.theme.color.border};
-  padding:${(props) => props.theme.defaultGab}
+  border-bottom:1px solid ${props => props.theme.color.border};
+  padding:${props => props.theme.defaultGab}
 `
 
 class Autocomplete extends Component {
@@ -44,15 +44,21 @@ class Autocomplete extends Component {
     this.setState({ list: matchingList })
   }
 
-  onClickAutocompleteItem (vehicle) {
-    this.context.router.history.push(concatParameters(vehicle.value, this))
+  onClickAutocompleteItem (answer) {
+    this.context.router.history.push(
+      concatParameters(
+        this.props.data.id,
+        answer.value,
+        this.context.router.route.location.search
+      )
+    )
   }
 
   renderList () {
-    return this.state.list.map((vehicle) => {
+    return this.state.list.map((answer) => {
       return (
-        <AutocompleteItem key={vehicle.value} onClick={() => this.onClickAutocompleteItem(vehicle)}>
-          {vehicle.title}
+        <AutocompleteItem key={answer.value} onClick={() => this.onClickAutocompleteItem(answer)}>
+          {answer.title}
         </AutocompleteItem>
       )
     })
