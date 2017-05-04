@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import clear from 'styles/mixins/clear'
+import { clear } from 'styles/mixins'
 
 import { connect } from 'react-redux'
 import { fetchList } from '../../data/vehicles/actions'
 import { getList } from '../../data/vehicles/reducer'
-import { fetchCoreData } from '../../data/coreData/actions'
-import { getCoreData } from '../../data/coreData/reducer'
 
 import Content from 'components/Content/'
 import Header from 'components/Header/'
@@ -48,7 +46,6 @@ const ResultList = class ResultList extends Component {
     if (!this.props.vehiclesList.length) {
       this.props.fetchList(this.props.history.location.search)
     }
-    this.props.fetchCoreData(this.props.history.location.search)
   }
 
   renderList () {
@@ -83,7 +80,11 @@ const ResultList = class ResultList extends Component {
     return (
       <div>
         <Header>
-          <PageTitle>{this.props.vehiclesList.meta.length} passende Fahrzeuge gefunden</PageTitle>
+          {this.props.vehiclesList.meta.length !== 1 ? (
+            <PageTitle>{this.props.vehiclesList.meta.length} passende Fahrzeuge gefunden</PageTitle>
+          ) : (
+            <PageTitle>{this.props.vehiclesList.meta.length} passendes Fahrzeuge gefunden</PageTitle>
+          )}
         </Header>
         <Content>
           <ListContainer>
@@ -96,11 +97,9 @@ const ResultList = class ResultList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  vehiclesList: getList(state),
-  coreDataList: getCoreData(state)
+  vehiclesList: getList(state)
 })
 
 export default connect(mapStateToProps, {
-  fetchList,
-  fetchCoreData
+  fetchList
 })(ResultList)
