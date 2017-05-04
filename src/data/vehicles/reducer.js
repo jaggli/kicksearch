@@ -1,7 +1,7 @@
 import { FETCH_LIST } from './actions'
 
 const initialState = {
-  all: []
+  all: {}
 }
 
 const reducer = (state = initialState, action) => {

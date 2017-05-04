@@ -23,9 +23,9 @@ class Home extends Component {
 
   constructor (props) {
     super(props)
-
-    props.history.listen(()=>props.fetchList(props.history.location.search))
-
+    this.unlistenHistory = props.history.listen(() => {
+      props.fetchList(props.history.location.search)
+    })
     this.onClickSkip = this.onClickSkip.bind(this)
   }
 
@@ -33,11 +33,14 @@ class Home extends Component {
     this.props.fetchList(this.props.history.location.search)
   }
 
+  componentWillUnmount () {
+    this.unlistenHistory();
+  }
+
   onClickSkip () {
     this.context.router.history.push(
       concatParameters(
-        this.props.vehiclesList.next.id,
-        '',
+        `${this.props.vehiclesList.next.id}=`,
         this.props.history.location.search
       )
     )
@@ -47,7 +50,7 @@ class Home extends Component {
     // if fetch is not finished yet
     if (!this.props.vehiclesList.next) { return null }
     // if ready for resultlist
-    if (this.props.vehiclesList.meta.length <= 20) {
+    if (this.props.vehiclesList.meta.length <= 40 && this.props.history.location.search) {
       return <Redirect to={`/resultlist${this.props.history.location.search}`} />
     }
 

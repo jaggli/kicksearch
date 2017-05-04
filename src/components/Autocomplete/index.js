@@ -29,12 +29,14 @@ class Autocomplete extends Component {
     this.onChangeAutocompleteInput = this.onChangeAutocompleteInput.bind(this)
     this.renderList = this.renderList.bind(this)
 
-    this.state = { list: [] }
+    this.state = { list: [], term:'' }
   }
 
   onChangeAutocompleteInput (event) {
     let answers = this.props.data.answers
     let value = event.target.value
+
+    this.setState({term: value})
 
     if (!value) { return this.setState({list: []}) }
 
@@ -47,8 +49,7 @@ class Autocomplete extends Component {
   onClickAutocompleteItem (answer) {
     this.context.router.history.push(
       concatParameters(
-        this.props.data.id,
-        answer.value,
+        `${this.props.data.id}=${answer.value}`,
         this.context.router.route.location.search
       )
     )
@@ -67,7 +68,12 @@ class Autocomplete extends Component {
   render () {
     return (
       <div>
-        <Input placeholder='z.b. Audi' onChange={this.onChangeAutocompleteInput} />
+        <Input
+          placeholder='z.b. Audi'
+          onChange={this.onChangeAutocompleteInput}
+          type='text'
+          value={this.state.term}
+          />
         <AutocompleteList>
           {this.renderList()}
         </AutocompleteList>

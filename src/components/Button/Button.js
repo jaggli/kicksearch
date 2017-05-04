@@ -17,6 +17,7 @@ import styled from 'styled-components'
 // `
 
 const Button = styled.a`
+  border-radius:4px;
   padding:10px 0;
   display:block;
   width:100%;

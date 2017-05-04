@@ -43,7 +43,7 @@ const ListItem = styled.li`
 const ResultList = class ResultList extends Component {
   componentDidMount () {
     // get new vehicles list if direct call
-    if (!this.props.vehiclesList.length) {
+    if (!this.props.vehiclesList.next) {
       this.props.fetchList(this.props.history.location.search)
     }
   }
@@ -60,7 +60,7 @@ const ResultList = class ResultList extends Component {
             {vehicle.Images ? (
               <Image src={vehicle.Images} alt={`${vehicle.MakeId} - ${vehicle.ModelId}`} />
             ) : (
-              <Image src={process.env.PUBLIC_URL + '/img/no-pic.jpg'} alt='no image' />
+              <Image src={process.env.PUBLIC_URL + '/img/no-pic.jpg'} alt='no image available' />
             )}
           </ImageContainer>
           {vehicle.MakeId}
