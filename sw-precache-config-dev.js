@@ -11,10 +11,11 @@ module.exports = {
   runtimeCaching: [{
     urlPattern: /^https:\/\/kicksearch-data\.herokuapp\.com/,
     handler: 'fastest'
-  },
-  {
+  }, {
     urlPattern: /^https:\/\/cas01\.autoscout24\.ch/,
     handler: 'fastest'
-  }
-  ]
+  }, {
+    urlPattern: /^https:\/\/kicksearch\.herokuapp\.com\/resultlist/,
+    handler: 'fastest'
+  }]
 }
