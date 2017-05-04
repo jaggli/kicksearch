@@ -8,7 +8,7 @@ module.exports = {
   dontCacheBustUrlsMatching: /\.\w{8}\./,
   swFilePath: 'build/service-worker.js',
   runtimeCaching: [{
-    urlPattern: /^https:\/\/kicksearch-data\.herokuapp\.com\/api\/v1/,
+    urlPattern: /^https:\/\/kicksearch-data\.herokuapp\.com/,
     handler: 'fastest'
   }]
 }
