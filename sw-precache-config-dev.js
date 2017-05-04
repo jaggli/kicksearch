@@ -13,7 +13,7 @@ module.exports = {
     handler: 'fastest'
   },
   {
-    urlPattern: /^http:\/\/cas01\.autoscout24\.ch/,
+    urlPattern: /^https:\/\/cas01\.autoscout24\.ch/,
     handler: 'fastest'
   }
   ]
