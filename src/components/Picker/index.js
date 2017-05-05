@@ -33,7 +33,8 @@ const FieldItem = styled.div`
   box-sizing:border-box;
   display: flex;
   flex-direction: column;
-  &:active{ background-color:#ccc; }
+  &:active,
+  &:hover{ background-color:#ccc; }
 `
 
 const PickerItem = styled.div`
@@ -41,6 +42,7 @@ const PickerItem = styled.div`
   padding:0 0 0 ${props => props.theme.defaultGab};
   width:50%;
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 `
 
 const PickerContainer = styled.div`

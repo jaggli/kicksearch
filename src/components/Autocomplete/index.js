@@ -15,7 +15,9 @@ const AutocompleteList = styled.ul`
 const AutocompleteItem = styled.li`
   border-bottom:1px solid ${props => props.theme.color.border};
   padding:${props => props.theme.defaultGab};
-  &:active{ background-color:#ccc; }
+  &:active,
+  &:hover{ background-color:#ccc; }
+  -webkit-tap-highlight-color:transparent;
 `
 
 class Autocomplete extends Component {
