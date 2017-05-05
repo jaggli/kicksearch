@@ -24,6 +24,7 @@ const Button = styled.a`
   background-color:${props => props.theme.color.buttonBackground};
   text-align:center;
   user-select:none;
+  &:active{ background-color:#aaa; }
 `
 
 export default Button
