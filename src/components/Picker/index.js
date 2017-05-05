@@ -21,7 +21,6 @@ const TextFieldOnly = styled.div`
   display:flex;
   flex-direction: column;
   justify-content:center;
-  text-align:center;
   min-height:150px;
 `
 
@@ -33,6 +32,7 @@ const FieldItem = styled.div`
   box-sizing:border-box;
   display: flex;
   flex-direction: column;
+  text-align:center;
   &:active,
   &:hover{ background-color:#ccc; }
 `
